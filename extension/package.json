@@ -1,0 +1,29 @@
+{
+  "name": "glance-extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "generate:icons": "node ./scripts/generate-icons.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@mozilla/readability": "0.6.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.59.1",
+    "@crxjs/vite-plugin": "2.4.0",
+    "@types/chrome": "0.1.40",
+    "@types/node": "25.6.0",
+    "@vitest/coverage-v8": "4.1.4",
+    "type-fest": "5.1.0",
+    "typescript": "6.0.2",
+    "vite": "8.0.8",
+    "vitest": "4.1.4"
+  }
+}

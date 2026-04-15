@@ -1,0 +1,592 @@
+:host {
+  all: initial;
+}
+
+.glance-shell,
+.glance-shell * {
+  box-sizing: border-box;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ─── THEME TOKENS: DARK (default) ─────────────────────────────────────── */
+.glance-shell {
+  --g-bg:           #040c18;
+  --g-surface:      rgba(8, 20, 40, 0.9);
+  --g-input:        rgba(4, 10, 22, 0.9);
+  --g-t1:           #e2f0ff;
+  --g-t2:           #c8d9ee;
+  --g-t3:           #94a3b8;
+  --g-t4:           rgba(148, 163, 184, 0.7);
+  --g-b1:           rgba(14, 165, 233, 0.2);
+  --g-b2:           rgba(14, 165, 233, 0.45);
+  --g-brand-h2:     #f0f9ff;
+  --g-brand-sub:    rgba(14, 165, 233, 0.65);
+  --g-header-tint:  rgba(6, 182, 212, 0.07);
+  --g-icon-bg:      rgba(14, 165, 233, 0.08);
+  --g-icon-border:  rgba(14, 165, 233, 0.15);
+  --g-icon-color:   rgba(14, 165, 233, 0.8);
+  --g-icon-hover-bg:      rgba(14, 165, 233, 0.16);
+  --g-icon-hover-border:  rgba(14, 165, 233, 0.4);
+  --g-icon-hover-color:   #38bdf8;
+  --g-sec-bg:       rgba(14, 165, 233, 0.08);
+  --g-sec-border:   rgba(14, 165, 233, 0.2);
+  --g-sec-color:    #38bdf8;
+  --g-panel-icon:   rgba(14, 165, 233, 0.55);
+  --g-skel-1:       rgba(14, 165, 233, 0.05);
+  --g-skel-2:       rgba(14, 165, 233, 0.14);
+  --g-answer-bg:    rgba(6, 182, 212, 0.06);
+  --g-answer-border:rgba(6, 182, 212, 0.15);
+  --g-answer-color: #bae6fd;
+  --g-err-bg:       rgba(60, 10, 10, 0.5);
+  --g-err-border:   rgba(239, 68, 68, 0.22);
+  --g-err-icon:     rgba(248, 113, 113, 0.85);
+  --g-err-h3:       rgba(252, 165, 165, 0.95);
+  --g-err-text:     #fecaca;
+  --g-tip-bg:       #040c18;
+  --g-tip-border:   rgba(6, 182, 212, 0.25);
+  --g-tip-color:    #bae6fd;
+  --g-scroll:       rgba(14, 165, 233, 0.18);
+  --g-shadow:       -32px 0 80px rgba(0,0,0,0.75), -1px 0 0 rgba(14,165,233,0.07);
+  --g-left-accent:  rgba(14, 165, 233, 0.3);
+}
+
+/* ─── THEME TOKENS: LIGHT ────────────────────────────────────────────────── */
+.glance-shell.is-light {
+  --g-bg:           #eef5ff;
+  --g-surface:      #ffffff;
+  --g-input:        #f8fafc;
+  --g-t1:           #0c1a2e;
+  --g-t2:           #1e3a5c;
+  --g-t3:           #475569;
+  --g-t4:           #64748b;
+  --g-b1:           rgba(14, 165, 233, 0.28);
+  --g-b2:           rgba(14, 165, 233, 0.6);
+  --g-brand-h2:     #0c1a2e;
+  --g-brand-sub:    rgba(2, 132, 199, 0.75);
+  --g-header-tint:  rgba(14, 165, 233, 0.05);
+  --g-icon-bg:      rgba(14, 165, 233, 0.08);
+  --g-icon-border:  rgba(14, 165, 233, 0.22);
+  --g-icon-color:   #0284c7;
+  --g-icon-hover-bg:      rgba(14, 165, 233, 0.15);
+  --g-icon-hover-border:  rgba(14, 165, 233, 0.5);
+  --g-icon-hover-color:   #0369a1;
+  --g-sec-bg:       rgba(14, 165, 233, 0.08);
+  --g-sec-border:   rgba(14, 165, 233, 0.25);
+  --g-sec-color:    #0284c7;
+  --g-panel-icon:   rgba(2, 132, 199, 0.6);
+  --g-skel-1:       #dde9f5;
+  --g-skel-2:       #b8d4ec;
+  --g-answer-bg:    rgba(14, 165, 233, 0.07);
+  --g-answer-border:rgba(14, 165, 233, 0.22);
+  --g-answer-color: #0369a1;
+  --g-err-bg:       #fef2f2;
+  --g-err-border:   rgba(239, 68, 68, 0.3);
+  --g-err-icon:     #dc2626;
+  --g-err-h3:       #991b1b;
+  --g-err-text:     #7f1d1d;
+  --g-tip-bg:       #0f172a;
+  --g-tip-border:   rgba(14, 165, 233, 0.35);
+  --g-tip-color:    #bae6fd;
+  --g-scroll:       rgba(14, 165, 233, 0.3);
+  --g-shadow:       -28px 0 60px rgba(0,0,0,0.12), -1px 0 0 rgba(14,165,233,0.15);
+  --g-left-accent:  rgba(14, 165, 233, 0.45);
+}
+
+/* ─── SHELL ─────────────────────────────────────────────────────────────── */
+.glance-shell {
+  width: 360px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--g-bg);
+  color: var(--g-t1);
+  border-left: 1px solid var(--g-b1);
+  box-shadow: var(--g-shadow);
+  transition: background 250ms ease, color 250ms ease, border-color 250ms ease;
+}
+
+/* ─── HEADER ─────────────────────────────────────────────────────────────── */
+.glance-header {
+  padding: 13px 14px 11px;
+  border-bottom: 1px solid var(--g-b1);
+  background: linear-gradient(180deg, var(--g-header-tint) 0%, transparent 100%);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.glance-header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(6, 182, 212, 0.75) 40%,
+    rgba(139, 92, 246, 0.55) 70%,
+    transparent 100%
+  );
+}
+
+.glance-brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.glance-brand-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.glance-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 14px rgba(14, 165, 233, 0.45), 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.glance-brand-text {
+  min-width: 0;
+}
+
+.glance-brand h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--g-brand-h2);
+  line-height: 1.2;
+}
+
+.glance-brand-sub {
+  display: block;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--g-brand-sub);
+  margin-top: 2px;
+}
+
+.glance-meta {
+  margin: 9px 0 0 40px;
+  font-size: 11px;
+  color: var(--g-t4);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.glance-header-actions {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+/* ─── BUTTONS ─────────────────────────────────────────────────────────────── */
+.glance-icon-button,
+.glance-primary-button,
+.glance-secondary-button {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: all 150ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glance-icon-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--g-icon-bg);
+  border: 1px solid var(--g-icon-border);
+  color: var(--g-icon-color);
+}
+
+.glance-icon-button:hover {
+  background: var(--g-icon-hover-bg);
+  border-color: var(--g-icon-hover-border);
+  color: var(--g-icon-hover-color);
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.2);
+}
+
+.glance-icon-button:focus-visible {
+  outline: 2px solid rgba(14, 165, 233, 0.5);
+  outline-offset: 2px;
+}
+
+.glance-primary-button,
+.glance-secondary-button {
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 9px;
+  gap: 6px;
+}
+
+.glance-primary-button {
+  background: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.3);
+}
+
+.glance-primary-button:hover:not(:disabled) {
+  box-shadow: 0 0 26px rgba(14, 165, 233, 0.55);
+  transform: translateY(-1px);
+}
+
+.glance-primary-button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+  box-shadow: none;
+  transform: none;
+}
+
+.glance-secondary-button {
+  background: var(--g-sec-bg);
+  border: 1px solid var(--g-sec-border);
+  color: var(--g-sec-color);
+}
+
+.glance-secondary-button:hover {
+  background: var(--g-icon-hover-bg);
+  border-color: var(--g-icon-hover-border);
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.15);
+}
+
+/* ─── BODY ─────────────────────────────────────────────────────────────── */
+.glance-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 14px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--g-scroll) transparent;
+}
+
+.glance-body::-webkit-scrollbar {
+  width: 3px;
+}
+
+.glance-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.glance-body::-webkit-scrollbar-thumb {
+  background: var(--g-scroll);
+  border-radius: 999px;
+}
+
+/* ─── PANELS ─────────────────────────────────────────────────────────────── */
+.glance-panel {
+  padding: 14px 16px;
+  border: 1px solid var(--g-b1);
+  border-left: 3px solid var(--g-left-accent);
+  border-radius: 13px;
+  background: var(--g-surface);
+  position: relative;
+  transition: background 250ms ease, border-color 250ms ease;
+}
+
+.glance-panel::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--g-b2), transparent);
+}
+
+.glance-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.glance-panel-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.glance-panel-icon {
+  color: var(--g-panel-icon);
+  flex-shrink: 0;
+  display: flex;
+}
+
+.glance-panel h3 {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--g-t3);
+}
+
+.glance-panel p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--g-t2);
+}
+
+.glance-panel li {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--g-t2);
+}
+
+.glance-panel li + li {
+  margin-top: 6px;
+}
+
+/* ─── LISTS ─────────────────────────────────────────────────────────────── */
+.glance-list {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.glance-list li::marker {
+  color: var(--g-left-accent);
+}
+
+.glance-list-numbered {
+  padding-left: 18px;
+}
+
+.glance-list-numbered li::marker {
+  color: var(--g-left-accent);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ─── BADGES ─────────────────────────────────────────────────────────────── */
+.glance-badge {
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+
+.is-positive,
+.is-high {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+.is-negative,
+.is-low {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.3);
+}
+
+.is-neutral,
+.is-medium {
+  background: rgba(14, 165, 233, 0.1);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.is-mixed {
+  background: rgba(139, 92, 246, 0.1);
+  color: #c4b5fd;
+  border-color: rgba(196, 181, 253, 0.3);
+}
+
+/* Light mode badge text adjustments for contrast */
+.glance-shell.is-light .is-positive,
+.glance-shell.is-light .is-high {
+  background: rgba(16, 185, 129, 0.1);
+  color: #15803d;
+  border-color: rgba(21, 128, 61, 0.35);
+}
+
+.glance-shell.is-light .is-negative,
+.glance-shell.is-light .is-low {
+  background: rgba(239, 68, 68, 0.08);
+  color: #b91c1c;
+  border-color: rgba(185, 28, 28, 0.35);
+}
+
+.glance-shell.is-light .is-neutral,
+.glance-shell.is-light .is-medium {
+  background: rgba(14, 165, 233, 0.1);
+  color: #0369a1;
+  border-color: rgba(3, 105, 161, 0.35);
+}
+
+.glance-shell.is-light .is-mixed {
+  background: rgba(109, 40, 217, 0.08);
+  color: #6d28d9;
+  border-color: rgba(109, 40, 217, 0.35);
+}
+
+/* ─── ASK PANEL ─────────────────────────────────────────────────────────── */
+.glance-label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--g-t4);
+}
+
+.glance-textarea {
+  width: 100%;
+  resize: none;
+  min-height: 72px;
+  border: 1px solid var(--g-b1);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--g-input);
+  color: var(--g-t1);
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease, background 250ms ease;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.glance-textarea:focus {
+  border-color: var(--g-b2);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.08);
+}
+
+.glance-textarea::placeholder {
+  color: var(--g-t4);
+  opacity: 0.7;
+}
+
+.glance-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.glance-answer {
+  display: none;
+  margin-top: 12px;
+  padding: 12px 13px;
+  border-radius: 10px;
+  background: var(--g-answer-bg);
+  border: 1px solid var(--g-answer-border);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--g-answer-color);
+  transition: background 250ms ease;
+}
+
+.glance-answer.is-visible {
+  display: block;
+}
+
+/* ─── ERROR PANEL ─────────────────────────────────────────────────────────── */
+.glance-panel-error {
+  background: var(--g-err-bg);
+  border-color: var(--g-err-border);
+  border-left-color: rgba(239, 68, 68, 0.5);
+}
+
+.glance-panel-error::before {
+  background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.5), transparent);
+}
+
+.glance-panel-error .glance-panel-icon {
+  color: var(--g-err-icon);
+}
+
+.glance-panel-error h3 {
+  color: var(--g-err-h3);
+}
+
+.glance-panel-error p {
+  color: var(--g-err-text);
+  margin-top: 4px;
+}
+
+/* ─── SKELETON ─────────────────────────────────────────────────────────────── */
+.glance-skeleton {
+  height: 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+  background: linear-gradient(
+    90deg,
+    var(--g-skel-1) 0%,
+    var(--g-skel-2) 40%,
+    rgba(139, 92, 246, 0.08) 60%,
+    var(--g-skel-1) 100%
+  );
+  background-size: 200% 100%;
+  animation: glance-shimmer 1.7s infinite linear;
+}
+
+.glance-skeleton-title {
+  width: 42%;
+  height: 8px;
+  margin-bottom: 12px;
+}
+
+.glance-skeleton-wide  { width: 92%; }
+.glance-skeleton-short { width: 62%; }
+.glance-skeleton-med   { width: 77%; }
+
+/* ─── TOOLTIP ─────────────────────────────────────────────────────────────── */
+.glance-tooltip {
+  position: fixed;
+  max-width: 300px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--g-tip-bg);
+  color: var(--g-tip-color);
+  border: 1px solid var(--g-tip-border);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 24px rgba(6,182,212,0.1);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
+@keyframes glance-shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glance-skeleton {
+    animation: none;
+    background: var(--g-skel-1);
+  }
+
+  .glance-primary-button:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .glance-shell {
+    transition: none;
+  }
+}

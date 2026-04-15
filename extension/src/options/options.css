@@ -1,0 +1,368 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ── Base ── */
+body {
+  margin: 0;
+  background: #040c18;
+  color: #e2f0ff;
+  font: 13px / 1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Scan-line top accent ── */
+body::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(6, 182, 212, 0.8) 40%,
+    rgba(139, 92, 246, 0.6) 70%,
+    transparent 100%
+  );
+}
+
+/* ── Page wrapper ── */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 36px 24px 64px;
+}
+
+/* ── Page header ── */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.page-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+}
+
+.page-title {
+  min-width: 0;
+}
+
+.page-title h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #f0f9ff;
+  line-height: 1.2;
+}
+
+.page-title p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: rgba(148, 163, 184, 0.75);
+  letter-spacing: 0.01em;
+}
+
+/* ── Layout ── */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+/* ── Card ── */
+.card {
+  padding: 22px;
+  border: 1px solid rgba(14, 165, 233, 0.1);
+  border-radius: 18px;
+  background: rgba(8, 18, 34, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.3), transparent);
+}
+
+/* ── Section headings inside cards ── */
+.card h2 {
+  margin: 0 0 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.card h2 svg {
+  color: rgba(14, 165, 233, 0.6);
+  flex-shrink: 0;
+}
+
+.card h2 + h2,
+.section-gap {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(14, 165, 233, 0.07);
+}
+
+/* ── Labels & Inputs ── */
+label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(203, 213, 225, 0.85);
+}
+
+label span.hint {
+  display: block;
+  font-weight: 400;
+  color: rgba(148, 163, 184, 0.6);
+  font-size: 11px;
+  margin-top: 2px;
+  letter-spacing: 0.01em;
+}
+
+input[type="password"],
+input[type="number"],
+input[type="text"],
+select {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid rgba(14, 165, 233, 0.14);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 13px;
+  background: rgba(4, 10, 22, 0.85);
+  color: #e2f0ff;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  appearance: none;
+}
+
+input[type="password"]::placeholder,
+input[type="text"]::placeholder {
+  color: rgba(100, 116, 139, 0.5);
+}
+
+input:focus,
+select:focus {
+  border-color: rgba(14, 165, 233, 0.38);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.07);
+}
+
+/* Custom select arrow */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%2338bdf8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ── API key mask ── */
+#api-key-mask {
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(148, 163, 184, 0.55);
+  font-family: ui-monospace, "SFMono-Regular", "Fira Code", monospace;
+  letter-spacing: 0.04em;
+}
+
+/* ── Checkboxes ── */
+.checkbox {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  font-weight: 400;
+  font-size: 13px;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  margin: 1px 0 0;
+  accent-color: #0ea5e9;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* ── Actions ── */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  border: none;
+  border-radius: 9px;
+  padding: 9px 16px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  outline: none;
+  transition: all 150ms ease;
+}
+
+button:focus-visible {
+  outline: 2px solid rgba(14, 165, 233, 0.6);
+  outline-offset: 2px;
+}
+
+.primary {
+  background: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(14, 165, 233, 0.25);
+}
+
+.primary:hover {
+  box-shadow: 0 0 22px rgba(14, 165, 233, 0.45);
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background: rgba(14, 165, 233, 0.07);
+  border: 1px solid rgba(14, 165, 233, 0.18);
+  color: #38bdf8;
+}
+
+.secondary:hover {
+  background: rgba(14, 165, 233, 0.13);
+  border-color: rgba(14, 165, 233, 0.35);
+}
+
+.danger {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+.danger:hover {
+  background: rgba(239, 68, 68, 0.14);
+  border-color: rgba(239, 68, 68, 0.38);
+}
+
+/* ── Status message ── */
+.status {
+  margin-top: 14px;
+  min-height: 22px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: color 200ms ease;
+}
+
+/* ── Metrics ── */
+.metric-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.metric-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(4, 10, 22, 0.6);
+  border: 1px solid rgba(14, 165, 233, 0.08);
+}
+
+.metric-label {
+  font-size: 11px;
+  color: rgba(148, 163, 184, 0.7);
+  letter-spacing: 0.02em;
+}
+
+.metric-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #38bdf8;
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, "SFMono-Regular", "Fira Code", monospace;
+}
+
+/* ── Error log ── */
+.logs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.logs li {
+  padding: 9px 12px;
+  border-radius: 9px;
+  background: rgba(4, 10, 22, 0.55);
+  border: 1px solid rgba(14, 165, 233, 0.07);
+  font-size: 11px;
+  color: rgba(148, 163, 184, 0.7);
+  line-height: 1.4;
+}
+
+.logs li strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #f87171;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+  font-family: ui-monospace, "SFMono-Regular", "Fira Code", monospace;
+}
+
+/* ── Responsive ── */
+@media (max-width: 820px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary:hover {
+    transform: none;
+  }
+}

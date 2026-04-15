@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glance</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background: #040c18;
+        color: #e2f0ff;
+        font: 13px / 1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+
+      /* ── Top scan-line accent ── */
+      body::before {
+        content: "";
+        display: block;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(6, 182, 212, 0.8) 40%,
+          rgba(139, 92, 246, 0.6) 70%,
+          transparent 100%
+        );
+      }
+
+      main {
+        padding: 16px 16px 18px;
+      }
+
+      /* ── Brand row ── */
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .logo {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 0 16px rgba(14, 165, 233, 0.45);
+      }
+
+      .brand-text h1 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #f0f9ff;
+        line-height: 1.2;
+      }
+
+      .brand-text span {
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(14, 165, 233, 0.65);
+      }
+
+      /* ── Status card ── */
+      .status-card {
+        margin-bottom: 14px;
+        padding: 10px 12px;
+        border-radius: 11px;
+        border: 1px solid rgba(14, 165, 233, 0.12);
+        background: rgba(8, 18, 34, 0.7);
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .status-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.25), transparent);
+      }
+
+      .status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #94a3b8;
+        flex-shrink: 0;
+        margin-top: 4px;
+        transition: background 200ms ease;
+      }
+
+      .status-dot.is-ready {
+        background: #34d399;
+        box-shadow: 0 0 7px rgba(52, 211, 153, 0.6);
+        animation: pulse-dot 2s ease-in-out infinite;
+      }
+
+      .status-dot.is-error {
+        background: #f87171;
+        box-shadow: 0 0 7px rgba(248, 113, 113, 0.5);
+      }
+
+      #status {
+        font-size: 12px;
+        color: #94a3b8;
+        line-height: 1.45;
+        flex: 1;
+        transition: color 200ms ease;
+      }
+
+      /* ── Action buttons ── */
+      .actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      button {
+        flex: 1;
+        border: none;
+        border-radius: 9px;
+        padding: 9px 10px;
+        font: inherit;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        outline: none;
+        transition: all 150ms ease;
+      }
+
+      button:focus-visible {
+        outline: 2px solid rgba(14, 165, 233, 0.6);
+        outline-offset: 2px;
+      }
+
+      .primary {
+        background: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+        color: #fff;
+        box-shadow: 0 0 14px rgba(14, 165, 233, 0.28);
+      }
+
+      .primary:hover {
+        box-shadow: 0 0 22px rgba(14, 165, 233, 0.5);
+        transform: translateY(-1px);
+      }
+
+      .secondary {
+        background: rgba(14, 165, 233, 0.07);
+        border: 1px solid rgba(14, 165, 233, 0.18);
+        color: #38bdf8;
+      }
+
+      .secondary:hover {
+        background: rgba(14, 165, 233, 0.13);
+        border-color: rgba(14, 165, 233, 0.35);
+      }
+
+      @keyframes pulse-dot {
+        0%,
+        100% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .status-dot.is-ready {
+          animation: none;
+          opacity: 1;
+        }
+
+        .primary:hover {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 2L4 9h4l-1 5 5-7H8z" fill="white" stroke="white" stroke-width="0.4" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>Glance</h1>
+          <span>AI page intelligence</span>
+        </div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-dot" id="status-dot" aria-hidden="true"></div>
+        <div id="status">Checking your setup…</div>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="open-glance" type="button" aria-label="Open Glance sidebar">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 2L4 9h4l-1 5 5-7H8z" />
+          </svg>
+          Open Glance
+        </button>
+        <button class="secondary" id="open-settings" type="button" aria-label="Open settings">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="8" cy="8" r="2.2" />
+            <path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.6 3.6l1.1 1.1M11.3 11.3l1.1 1.1M3.6 12.4l1.1-1.1M11.3 4.7l1.1-1.1" />
+          </svg>
+          Settings
+        </button>
+      </div>
+    </main>
+    <script type="module" src="./index.ts"></script>
+  </body>
+</html>

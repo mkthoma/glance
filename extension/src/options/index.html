@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glance Settings</title>
+    <link rel="stylesheet" href="./options.css" />
+  </head>
+  <body>
+    <main>
+      <!-- Page header -->
+      <header class="page-header">
+        <div class="page-logo" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 2L4 9h4l-1 5 5-7H8z" fill="white" stroke="white" stroke-width="0.4" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="page-title">
+          <h1>Glance Settings</h1>
+          <p>Configure your API key, model, and sidebar behaviour — everything stays on-device.</p>
+        </div>
+      </header>
+
+      <div class="layout">
+        <!-- ── Left column: settings ── -->
+        <section class="card">
+          <!-- API Access -->
+          <h2>
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 7a3 3 0 11-5.12-2.12L9.88 8.88A3 3 0 0111 7z"/>
+              <path d="M5.88 8.88L3 11.75V14h2.25l.75-.75v-1.5H7.5L8.25 11v-1.5"/>
+            </svg>
+            API Access
+          </h2>
+
+          <label for="api-key">
+            Gemini API key
+            <span class="hint">Get yours at aistudio.google.com — it's free to start.</span>
+            <input id="api-key" type="password" placeholder="AIza…" autocomplete="off" />
+          </label>
+          <div id="api-key-mask">No API key saved yet.</div>
+
+          <!-- Behaviour -->
+          <div class="section-gap">
+            <h2>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="8" cy="8" r="2.2"/>
+                <path d="M8 1.5v1.6M8 12.9v1.6M1.5 8h1.6M12.9 8h1.6M3.6 3.6l1.1 1.1M11.3 11.3l1.1 1.1M3.6 12.4l1.1-1.1M11.3 4.7l1.1-1.1"/>
+              </svg>
+              Behaviour
+            </h2>
+          </div>
+
+          <label for="model-select">
+            Gemini model
+            <span class="hint">Flash models are faster; Pro models are more detailed.</span>
+            <select id="model-select" aria-label="Select Gemini model"></select>
+          </label>
+
+          <div class="inline">
+            <label for="max-words">
+              Max words
+              <span class="hint">Words sent to the AI per page (1 000–12 000).</span>
+              <input id="max-words" type="number" min="1000" max="12000" step="500" />
+            </label>
+            <label for="sidebar-side">
+              Sidebar side
+              <span class="hint">Which edge the panel anchors to.</span>
+              <select id="sidebar-side">
+                <option value="right">Right</option>
+                <option value="left">Left</option>
+              </select>
+            </label>
+          </div>
+
+          <label class="checkbox">
+            <input id="enable-caching" type="checkbox" />
+            Cache briefings for 30 minutes per URL
+          </label>
+          <label class="checkbox">
+            <input id="auto-translate" type="checkbox" />
+            Auto-translate briefings to English
+          </label>
+
+          <div class="actions">
+            <button class="primary" id="save-settings" type="button">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M13 11v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2"/>
+                <path d="M8 2v8M5 7l3 3 3-3"/>
+              </svg>
+              Save Settings
+            </button>
+            <button class="secondary" id="clear-cache" type="button">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 4h10M6 4V3h4v1M5 4v8a1 1 0 001 1h4a1 1 0 001-1V4"/>
+              </svg>
+              Clear Cache
+            </button>
+            <button class="danger" id="clear-key" type="button">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 3l10 10M13 3L3 13"/>
+              </svg>
+              Clear API Key
+            </button>
+          </div>
+          <div class="status" id="status-message" aria-live="polite"></div>
+        </section>
+
+        <!-- ── Right column: stats ── -->
+        <aside class="card">
+          <h2>
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 12V9l4-4 3 3 5-5"/>
+              <path d="M2 12h12"/>
+            </svg>
+            Usage Snapshot
+          </h2>
+
+          <div class="metric-grid">
+            <div class="metric-item">
+              <span class="metric-label">Total briefings</span>
+              <span class="metric-value" id="metric-briefings">0</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Input chars processed</span>
+              <span class="metric-value" id="metric-input">0</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-label">Logged errors</span>
+              <span class="metric-value" id="metric-errors">0</span>
+            </div>
+          </div>
+
+          <div class="section-gap">
+            <h2>
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M8 2L1.5 13h13z"/>
+                <path d="M8 6v3.5"/>
+                <circle cx="8" cy="11.5" r=".5" fill="currentColor"/>
+              </svg>
+              Recent Errors
+            </h2>
+          </div>
+          <ol class="logs" id="error-log" aria-label="Recent error log"></ol>
+        </aside>
+      </div>
+    </main>
+    <script type="module" src="./index.ts"></script>
+  </body>
+</html>

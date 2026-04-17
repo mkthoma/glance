@@ -30,9 +30,7 @@ The product is designed to be:
 
 ## Demo Video
 
-> **Coming soon.** A short walkthrough of Glance in action -opening the sidebar, reading the briefing, and using "Ask This Page" -will be added here.
-
-To record your own demo, load the unpacked extension from `extension/dist`, navigate to any article, and use `Alt+P` to open the sidebar.
+https://github.com/user-attachments/assets/95fac9a5-12dd-4f7d-a77c-b3b26edc6560
 
 ---
 
